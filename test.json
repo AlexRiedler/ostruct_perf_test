@@ -2,7 +2,6 @@
   "data": [
     {
     "_id": "5eae70f5e448a84eee849346",
-    "index": 0,
     "guid": "baadb791-1098-47f0-a654-21b02bc836a3",
     "isActive": true,
     "balance": "$1,138.04",
@@ -10,8 +9,8 @@
     "age": 36,
     "eyeColor": "blue",
     "name": {
-      "first": "Nguyen",
-      "last": "Carroll"
+      "firstname": "Nguyen",
+      "lastname": "Carroll"
     },
     "company": "ACUSAGE",
     "email": "nguyen.carroll@acusage.tv",
@@ -59,7 +58,6 @@
     },
     {
     "_id": "5eae70f5e1e713b820ade9ba",
-    "index": 1,
     "guid": "75939441-884a-4b33-8f36-d8de3dca4c5f",
     "isActive": false,
     "balance": "$3,068.69",
@@ -67,8 +65,8 @@
     "age": 23,
     "eyeColor": "green",
     "name": {
-      "first": "Oneil",
-      "last": "Mccullough"
+      "firstname": "Oneil",
+      "lastname": "Mccullough"
     },
     "company": "KIGGLE",
     "email": "oneil.mccullough@kiggle.name",
@@ -116,7 +114,6 @@
     },
     {
     "_id": "5eae70f55368cf01d17941cd",
-    "index": 2,
     "guid": "47108845-974c-4b9b-84ef-61084e22698b",
     "isActive": true,
     "balance": "$1,487.29",
@@ -124,8 +121,8 @@
     "age": 32,
     "eyeColor": "green",
     "name": {
-      "first": "Daniel",
-      "last": "Downs"
+      "firstname": "Daniel",
+      "lastname": "Downs"
     },
     "company": "MEDICROIX",
     "email": "daniel.downs@medicroix.biz",
@@ -173,7 +170,6 @@
     },
     {
     "_id": "5eae70f561f9181484dbe78f",
-    "index": 3,
     "guid": "baf8b9dc-e18d-4952-823d-f2bc09701ccf",
     "isActive": true,
     "balance": "$1,593.84",
@@ -181,8 +177,8 @@
     "age": 36,
     "eyeColor": "brown",
     "name": {
-      "first": "Robyn",
-      "last": "Franklin"
+      "firstname": "Robyn",
+      "lastname": "Franklin"
     },
     "company": "LIMAGE",
     "email": "robyn.franklin@limage.biz",
@@ -230,7 +226,6 @@
     },
     {
     "_id": "5eae70f57398c02fac7596e7",
-    "index": 4,
     "guid": "e43b524e-b2c3-471a-aed0-00ec7b5ec90c",
     "isActive": false,
     "balance": "$1,273.34",
@@ -238,8 +233,8 @@
     "age": 25,
     "eyeColor": "brown",
     "name": {
-      "first": "Jerry",
-      "last": "Coleman"
+      "firstname": "Jerry",
+      "lastname": "Coleman"
     },
     "company": "EARTHPLEX",
     "email": "jerry.coleman@earthplex.co.uk",
@@ -287,7 +282,6 @@
     },
     {
     "_id": "5eae70f53a71a41d1a029dc6",
-    "index": 5,
     "guid": "77a3308a-e619-4698-9fea-f8dc40169aa2",
     "isActive": true,
     "balance": "$1,208.89",
@@ -295,8 +289,8 @@
     "age": 20,
     "eyeColor": "green",
     "name": {
-      "first": "Estella",
-      "last": "Bean"
+      "firstname": "Estella",
+      "lastname": "Bean"
     },
     "company": "KIDSTOCK",
     "email": "estella.bean@kidstock.ca",
