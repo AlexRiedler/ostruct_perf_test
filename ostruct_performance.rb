@@ -9,11 +9,15 @@ require 'ostruct'
 require 'hashie'
 require 'hashery'
 require 'recursive_open_struct'
+require_relative 'fast_struct_read_only'
+require_relative 'firm_struct'
 
 open_struct = JSON.parse(file_data, object_class: OpenStruct)
 open_cascade = Hashery::OpenCascade[data]
 recursive_struct = RecursiveOpenStruct.new(data, recurse_over_arrays: true)
 mash = Hashie::Mash.new(data)
+fast_struct = FastStructReadOnly.new(data)
+firm_struct = FirmStruct.new(data)
 
 puts "### Init\n\n```"
 
@@ -32,6 +36,12 @@ Benchmark.bm do |x|
   end
   x.report("recursive_open_struct create") do
     1000.times { RecursiveOpenStruct.new(data, recurse_over_arrays: true) }
+  end
+  x.report("fast_struct_read_only create") do
+    1000.times { FastStructReadOnly.new(data) }
+  end
+  x.report("firm_struct create") do
+    1000.times { FirmStruct.new(data) }
   end
 end
 
@@ -52,6 +62,12 @@ Benchmark.memory do |x|
   end
   x.report("recursive_open_struct create") do
     1000.times { RecursiveOpenStruct.new(data, recurse_over_arrays: true) }
+  end
+  x.report("fast_struct_read_only create") do
+    1000.times { FastStructReadOnly.new(data) }
+  end
+  x.report("firm_struct create") do
+    1000.times { FirmStruct.new(data) }
   end
 end
 
@@ -82,6 +98,18 @@ Benchmark.bm do |x|
       recursive_struct.data[0].friends[0].name
     end
   end
+  x.report("fast_struct_read_only lookup") do
+    5000.times do
+      fast_struct.data[0].name.firstname
+      fast_struct.data[0].friends[0].name
+    end
+  end
+  x.report("firm_struct lookup") do
+    5000.times do
+      firm_struct.data[0].name.firstname
+      firm_struct.data[0].friends[0].name
+    end
+  end
 end
 
 puts ""
@@ -111,6 +139,18 @@ Benchmark.memory do |x|
       recursive_struct.data[0].friends[0].name
     end
   end
+  x.report("fast_struct_read_only lookup") do
+    5000.times do
+      fast_struct.data[0].name.firstname
+      fast_struct.data[0].friends[0].name
+    end
+  end
+  x.report("firm_struct lookup") do
+    5000.times do
+      firm_struct.data[0].name.firstname
+      firm_struct.data[0].friends[0].name
+    end
+  end
 end
 
 puts "```\n\n### `to_hash`\n\n```"
@@ -136,6 +176,16 @@ Benchmark.bm do |x|
       recursive_struct.to_hash
     end
   end
+  x.report("fast_struct_read_only to hash") do
+    1000.times do
+      fast_struct.to_hash
+    end
+  end
+  x.report("firm_struct to hash") do
+    1000.times do
+      firm_struct.to_hash
+    end
+  end
 end
 
 Benchmark.memory do |x|
@@ -157,6 +207,16 @@ Benchmark.memory do |x|
   x.report("recursive_open_struct to_hash") do
     1000.times do
       recursive_struct.to_hash
+    end
+  end
+  x.report("fast_struct_read_only to hash") do
+    1000.times do
+      fast_struct.to_hash
+    end
+  end
+  x.report("firm_struct to hash") do
+    1000.times do
+      firm_struct.to_hash
     end
   end
 end

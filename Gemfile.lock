@@ -1,15 +1,15 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    benchmark-memory (0.1.2)
-      memory_profiler (~> 0.9)
+    benchmark-memory (0.2.0)
+      memory_profiler (~> 1)
     hashery (2.1.2)
-    hashie (4.1.0)
-    memory_profiler (0.9.14)
-    recursive-open-struct (1.1.1)
+    hashie (5.0.0)
+    memory_profiler (1.0.0)
+    recursive-open-struct (1.1.3)
 
 PLATFORMS
-  ruby
+  x86_64-darwin-18
 
 DEPENDENCIES
   benchmark-memory
@@ -18,4 +18,4 @@ DEPENDENCIES
   recursive-open-struct
 
 BUNDLED WITH
-   1.17.3
+   2.2.26
