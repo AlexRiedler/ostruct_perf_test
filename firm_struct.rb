@@ -2,7 +2,9 @@
 require 'json'
 
 class FirmStruct
-  def initialize(hash = Hash.new)
+  def initialize(hash)
+    raise ArgumentError, "first argument must be a Hash, found #{hash.class.name}" unless hash.is_a?(Hash)
+
     @hash = hash
     @ro_struct = Hash.new
   end
@@ -25,12 +27,27 @@ class FirmStruct
     super
   end
 
-  def [](key)
+  def [](key, *sub_keys)
     ckey = __convert_key(key)
 
-    return @ro_struct[ckey] if @ro_struct.key?(ckey)
+    result =
+      if @ro_struct.key?(ckey)
+        @ro_struct[ckey] 
+      else
+        @ro_struct[ckey] = __convert_value(@hash[ckey])
+      end
 
-    @ro_struct[ckey] = __convert_value(@hash[ckey])
+    return result if sub_keys.empty?
+
+    __dig(result, *sub_keys)
+  end
+
+  def __dig(result, first_key, *sub_keys)
+    return unless result
+
+    return result[first_key] if sub_keys.empty?
+
+    __dig(result[first_key], *sub_keys)
   end
 
   def __convert_value(value)
