@@ -15,7 +15,8 @@ open_struct = JSON.parse(file_data, object_class: OpenStruct)
 open_cascade = Hashery::OpenCascade[data]
 recursive_struct = RecursiveOpenStruct.new(data, recurse_over_arrays: true)
 mash = Hashie::Mash.new(data)
-firm_struct = ResourceStruct::FirmStruct.new(data)
+strict_struct = ResourceStruct::StrictStruct.new(data)
+flex_struct = ResourceStruct::StrictStruct.new(data)
 
 puts "### Init\n\n```"
 
@@ -35,11 +36,14 @@ Benchmark.bm do |x|
   x.report("recursive_open_struct create") do
     1000.times { RecursiveOpenStruct.new(data, recurse_over_arrays: true) }
   end
-  x.report("firm_struct create") do
-    1000.times { ResourceStruct::FirmStruct.new(data) }
+  x.report("strict_struct create") do
+    1000.times { ResourceStruct::StrictStruct.new(data) }
   end
-  x.report("firm_struct create - json parse") do
-    1000.times { JSON.parse(file_data, object_class: ResourceStruct::FirmStruct) }
+  x.report("flex_struct create") do
+    1000.times { ResourceStruct::FlexStruct.new(data) }
+  end
+  x.report("flex_struct create - json parse") do
+    1000.times { JSON.parse(file_data, object_class: ResourceStruct::FlexStruct) }
   end
 end
 
@@ -61,11 +65,14 @@ Benchmark.memory do |x|
   x.report("recursive_open_struct create") do
     1000.times { RecursiveOpenStruct.new(data, recurse_over_arrays: true) }
   end
-  x.report("firm_struct create") do
-    1000.times { ResourceStruct::FirmStruct.new(data) }
+  x.report("strict_struct create") do
+    1000.times { ResourceStruct::StrictStruct.new(data) }
   end
-  x.report("firm_struct create - json parse") do
-    1000.times { JSON.parse(file_data, object_class: ResourceStruct::FirmStruct) }
+  x.report("flex_struct create") do
+    1000.times { ResourceStruct::FlexStruct.new(data) }
+  end
+  x.report("flex_struct create - json parse") do
+    1000.times { JSON.parse(file_data, object_class: ResourceStruct::FlexStruct) }
   end
 end
 
@@ -96,10 +103,16 @@ Benchmark.bm do |x|
       recursive_struct.data[0].friends[0].name
     end
   end
-  x.report("firm_struct lookup") do
+  x.report("strict_struct lookup") do
     5000.times do
-      firm_struct.data[0].name.firstname
-      firm_struct.data[0].friends[0].name
+      strict_struct.data[0].name.firstname
+      strict_struct.data[0].friends[0].name
+    end
+  end
+  x.report("flex_struct lookup") do
+    5000.times do
+      flex_struct.data[0].name.firstname
+      flex_struct.data[0].friends[0].name
     end
   end
 end
@@ -131,10 +144,16 @@ Benchmark.memory do |x|
       recursive_struct.data[0].friends[0].name
     end
   end
-  x.report("firm_struct lookup") do
+  x.report("strict_struct lookup") do
     5000.times do
-      firm_struct.data[0].name.firstname
-      firm_struct.data[0].friends[0].name
+      strict_struct.data[0].name.firstname
+      strict_struct.data[0].friends[0].name
+    end
+  end
+  x.report("flex_struct lookup") do
+    5000.times do
+      flex_struct.data[0].name.firstname
+      flex_struct.data[0].friends[0].name
     end
   end
 end
@@ -162,9 +181,14 @@ Benchmark.bm do |x|
       recursive_struct.to_hash
     end
   end
-  x.report("firm_struct to hash") do
+  x.report("strict_struct to hash") do
     1000.times do
-      firm_struct.to_hash
+      strict_struct.to_hash
+    end
+  end
+  x.report("flex_struct to hash") do
+    1000.times do
+      flex_struct.to_hash
     end
   end
 end
@@ -190,9 +214,14 @@ Benchmark.memory do |x|
       recursive_struct.to_hash
     end
   end
-  x.report("firm_struct to hash") do
+  x.report("strict_struct to hash") do
     1000.times do
-      firm_struct.to_hash
+      strict_struct.to_hash
+    end
+  end
+  x.report("flex_struct to hash") do
+    1000.times do
+      flex_struct.to_hash
     end
   end
 end
