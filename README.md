@@ -1,8 +1,125 @@
 # Dot Notation Struct Performance Comparison
 
+## Results
 
-## Results on 2018 MBP
+### System Details
 
+Macbook Pro 2024 - M4 Pro (Ruby 4.0)
+
+### Init
+
+```
+                                     user     system      total        real
+json parse                       0.010571   0.000244   0.010815 (  0.010812)
+ostruct create                   0.269863   0.001837   0.271700 (  0.271712)
+mash create                      0.120493   0.000259   0.120752 (  0.120757)
+open_cascade create              0.000418   0.000006   0.000424 (  0.000424)
+recursive_open_struct create     0.057490   0.000278   0.057768 (  0.057765)
+strict_struct create             0.037860   0.000123   0.037983 (  0.037991)
+flex_struct create               0.038249   0.000088   0.038337 (  0.038338)
+flex_struct create - json parse  0.068375   0.000148   0.068523 (  0.068522)
+
+Calculating -------------------------------------
+          json parse    21.912M memsize (     0.000  retained)
+                       200.000k objects (     0.000  retained)
+                        50.000  strings (     0.000  retained)
+      ostruct create   153.488M memsize (     0.000  retained)
+                         1.871M objects (     0.000  retained)
+                        50.000  strings (     0.000  retained)
+         mash create    36.440M memsize (     0.000  retained)
+                       631.000k objects (     0.000  retained)
+                        25.000  strings (     0.000  retained)
+ open_cascade create   560.000k memsize (     0.000  retained)
+                         7.000k objects (     0.000  retained)
+                         0.000  strings (     0.000  retained)
+recursive_open_struct create
+                        25.632M memsize (     0.000  retained)
+                       232.000k objects (     0.000  retained)
+                         0.000  strings (     0.000  retained)
+strict_struct create    18.912M memsize (     0.000  retained)
+                       227.000k objects (     0.000  retained)
+                         0.000  strings (     0.000  retained)
+  flex_struct create    18.912M memsize (     0.000  retained)
+                       227.000k objects (     0.000  retained)
+                         0.000  strings (     0.000  retained)
+flex_struct create - json parse
+                        45.184M memsize (     0.000  retained)
+                       346.000k objects (     0.000  retained)
+                        50.000  strings (     0.000  retained)
+```
+
+### lookups
+
+```
+                                  user     system      total        real
+ostruct lookup                0.000556   0.000003   0.000559 (  0.000557)
+mash lookup                   0.007064   0.000006   0.007070 (  0.007074)
+open_cascade lookup           0.014148   0.000051   0.014199 (  0.014212)
+recursive_open_struct lookup  0.010543   0.000041   0.010584 (  0.010584)
+strict_struct lookup          0.007146   0.000019   0.007165 (  0.007167)
+flex_struct lookup            0.007170   0.000005   0.007175 (  0.007178)
+
+Calculating -------------------------------------
+      ostruct lookup     0.000  memsize (     0.000  retained)
+                         0.000  objects (     0.000  retained)
+                         0.000  strings (     0.000  retained)
+         mash lookup     3.600M memsize (     0.000  retained)
+                        90.000k objects (     0.000  retained)
+                         4.000  strings (     0.000  retained)
+ open_cascade lookup     9.000M memsize (     0.000  retained)
+                       225.000k objects (     0.000  retained)
+                         8.000  strings (     0.000  retained)
+recursive_open_struct lookup
+                         1.200M memsize (     0.000  retained)
+                        30.000k objects (     0.000  retained)
+                         4.000  strings (     0.000  retained)
+strict_struct lookup     4.800M memsize (     0.000  retained)
+                       120.000k objects (     0.000  retained)
+                         4.000  strings (     0.000  retained)
+  flex_struct lookup     4.800M memsize (     0.000  retained)
+                       120.000k objects (     0.000  retained)
+                         4.000  strings (     0.000  retained)
+```
+
+### `to_hash`
+
+```
+                                   user     system      total        real
+ostruct to_hash                0.000132   0.000001   0.000133 (  0.000131)
+mash to_hash                   0.062116   0.000237   0.062353 (  0.062370)
+open_cascade to_hash           0.000488   0.000000   0.000488 (  0.000491)
+recursive_open_struct to_hash  0.113784   0.000749   0.114533 (  0.114542)
+strict_struct to hash          0.000076   0.000000   0.000076 (  0.000076)
+flex_struct to hash            0.000071   0.000000   0.000071 (  0.000072)
+Calculating -------------------------------------
+     ostruct to_hash    40.000k memsize (     0.000  retained)
+                         1.000k objects (     0.000  retained)
+                         0.000  strings (     0.000  retained)
+        mash to_hash    15.352M memsize (     0.000  retained)
+                        81.000k objects (     0.000  retained)
+                         0.000  strings (     0.000  retained)
+open_cascade to_hash   280.000k memsize (     0.000  retained)
+                         4.000k objects (     0.000  retained)
+                         0.000  strings (     0.000  retained)
+recursive_open_struct to_hash
+                        52.928M memsize (     0.000  retained)
+                       466.000k objects (     0.000  retained)
+                         0.000  strings (     0.000  retained)
+strict_struct to hash
+                       160.000k memsize (     0.000  retained)
+                         1.000k objects (     0.000  retained)
+                         0.000  strings (     0.000  retained)
+ flex_struct to hash   160.000k memsize (     0.000  retained)
+                         1.000k objects (     0.000  retained)
+                         0.000  strings (     0.000  retained)
+```
+
+
+## Results
+
+### System Details
+
+Macbook Pro 2018 (Ruby 2.2)
 
 ### Init
 
